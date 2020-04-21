@@ -2,33 +2,13 @@
 const gutil = require('gulp-util')
 const through = require('through2')
 const fs = require('fs')
-const dateFormat = require('dateformat');
 const colors = require('colors');
-
-colors.setTheme({
-  silly: 'rainbow',
-  input: 'grey',
-  verbose: 'cyan',
-  prompt: 'grey',
-  info: 'green',
-  data: 'grey',
-  help: 'cyan',
-  warn: 'yellow',
-  debug: 'blue',
-  error: 'red'
-});
-
 
 module.exports = function (options) {
   options = options || {};
 
   let importStack = {};
   let _path = '';
-
-  const getTime = (formats) => {
-    return dateFormat(new Date(), formats);
-  };
-
 
   const importJS = (path) => {
     if (!path) {
@@ -55,7 +35,7 @@ module.exports = function (options) {
         return '';
       }
 
-      !options.hideConsole && console.log('[' + `${getTime("HH:MM:ss")}`.input + '] ' + 'import: \'' + fileName + '\'');
+      !options.hideConsole && console.log('import: ' + colors.magenta(fileName));
       // _path = _path !== path ? ;
       if (_path !== path) {
         _path = path;
@@ -90,11 +70,10 @@ module.exports = function (options) {
     file.contents = new Buffer(content);
     file.path = gutil.replaceExtension(file.path, '.js');
 
+    !options.hideConsole && _path && console.log('   |--> '.gray + colors.magenta.bold(_path));
+    console.log('gulp-js-import finished.'.rainbow);
 
-    // console.log('[' + `${now}`.input + ']' + `\nGulp Finish build ==//==>`.green + ` ${pkg.name}`.grey + ` Update v${pkg.version}`.error);
-    _path && console.log('[' + `${getTime("HH:MM:ss")}`.input + ']   |---> \'' + _path + '\'');
 
-    !options.hideConsole && console.log('[' + `${getTime("HH:MM:ss")}`.input + '] ' + 'gulp-js-import finished.');
     cb(null, file);
   });
 };
