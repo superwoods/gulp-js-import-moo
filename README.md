@@ -1,18 +1,22 @@
+鸣谢原作者: https://www.npmjs.com/package/gulp-js-import
+
+因为原作者不更新了，但输出样式不够美观所以进行了优化。
+
 ## INSTALL
 
 ```
-npm install gulp-js-import --save-dev
+npm install gulp-js-import-moo --save-dev
 ```
 ## USAGE
 
-First, install `gulp-js-import` as a devDependency:
+First, install `gulp-js-import-moo` as a devDependency:
 
 Then add it to the gulpfile.js:
 
 
 ```
 var gulp = require('gulp');
-var jsImport = require('gulp-js-import');
+var jsImport = require('gulp-js-import-moo');
 
 gulp.task('import', function() {
   return gulp.src('index.js')
@@ -69,7 +73,7 @@ Enter the `demo` directory in command
 ```
 cd demo
 ```
-Install `gulp` `gulp-js-import` 
+Install `gulp` `gulp-js-import-moo` 
 
 ```
 gulp install
